@@ -8,11 +8,17 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, 'src/main.ts'),
             name: 'ProductiveConnector',
+            fileName: () => 'Code.gs',
+            formats: ['es'],
             // the proper extensions will be added
-            fileName: 'Code',
         },
         formats: ['es'],
-        outDir: './',
+        rollupOptions: {
+            output: {
+                dir: 'dist',
+                format: 'es',
+            }
+        }
     },
 
     esbuild: {

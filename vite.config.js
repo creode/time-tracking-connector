@@ -7,16 +7,13 @@ export default defineConfig({
         manifest: false,
         lib: {
             entry: resolve(__dirname, 'src/main.ts'),
-            name: 'ProductiveConnector',
-            fileName: () => 'Code.gs',
-            formats: ['es'],
+            name: 'Code',
+            fileName: 'Code',
             // the proper extensions will be added
         },
-        formats: ['es'],
         rollupOptions: {
             output: {
-                dir: 'dist',
-                format: 'es',
+                dir: './',
             }
         }
     },

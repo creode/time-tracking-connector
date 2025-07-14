@@ -1,0 +1,23 @@
+{
+  "timeZone": "Europe/London",
+  "dependencies": {
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "dataStudio": {
+    "name": "Time Tracking",
+    "logoUrl": "https://raw.githubusercontent.com/npm/logos/master/npm%20square/n-64.png",
+    "company": "Creode",
+    "companyUrl": "https://creode.co.uk",
+    "addonUrl": "",
+    "supportUrl": "https://github.com/googledatastudio/community-connectors/issues",
+    "description": "Get npm package download counts.",
+    "sources": ["npm"],
+    "templates": {
+      "default": "1twu0sHjqR5dELAPyGJcw4GS3-D0_NTrQ"
+    }
+  },
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/script.external_request"
+  ]
+}

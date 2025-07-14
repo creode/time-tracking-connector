@@ -1,7 +1,5 @@
 class ProductiveApi {
-    private apiKey: string|null;
-
-    constructor(apiKey: string|null) {
+    constructor(apiKey) {
         if (!apiKey) {
             throw new Error('API key is required');
         }
@@ -22,11 +20,9 @@ class ProductiveApi {
 
         let projects = JSON.parse(response.getContentText());
 
-        return projects.map((project: any) => ({
+        return projects.map((project) => ({
             id: project.id,
             name: project.name
         }));
     }
 }
-
-export default ProductiveApi;

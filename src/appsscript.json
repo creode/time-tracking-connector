@@ -9,10 +9,10 @@
     "logoUrl": "https://raw.githubusercontent.com/npm/logos/master/npm%20square/n-64.png",
     "company": "Creode",
     "companyUrl": "https://creode.co.uk",
-    "addonUrl": "",
-    "supportUrl": "https://github.com/googledatastudio/community-connectors/issues",
-    "description": "Get npm package download counts.",
-    "sources": ["npm"],
+    "addonUrl": "https://github.com/creode/time-tracking-connector",
+    "supportUrl": "https://github.com/creode/time-tracking-connector/issues",
+    "description": "Get time tracking data from Productive.",
+    "sources": ["Productive"],
     "templates": {
       "default": "1twu0sHjqR5dELAPyGJcw4GS3-D0_NTrQ"
     }

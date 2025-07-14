@@ -1,0 +1,46 @@
+function getAuthType() {
+  var cc2 = DataStudioApp.createCommunityConnector();
+  return cc2.newAuthTypeResponse().setAuthType(cc2.AuthType.KEY).setHelpUrl("https://help.productive.io/en/articles/5440689-api-access-with-personal-access-tokens").build();
+}
+function resetAuth() {
+  var userProperties = PropertiesService.getUserProperties();
+  userProperties.deleteProperty("dscc.key");
+}
+function isAuthValid() {
+  var userProperties = PropertiesService.getUserProperties(), key = userProperties.getProperty("dscc.key");
+  return key !== null;
+}
+class ProductiveApi {
+  apiKey;
+  constructor(apiKey2) {
+    if (!apiKey2)
+      throw new Error("API key is required");
+    if (apiKey2.length !== 32)
+      throw new Error("API key is invalid");
+    this.apiKey = apiKey2;
+  }
+  getProjects() {
+    var response = UrlFetchApp.fetch("https://api.productive.io/api/v2/projects", {
+      headers: {
+        Authorization: `Bearer ${this.apiKey}`
+      }
+    });
+    return JSON.parse(response.getContentText()).map((project) => ({
+      id: project.id,
+      name: project.name
+    }));
+  }
+}
+var cc = DataStudioApp.createCommunityConnector(), apiKey = PropertiesService.getUserProperties().getProperty("dscc.key");
+function getConfig() {
+  var config = cc.getConfig(), productiveApi = new ProductiveApi(apiKey), projects = productiveApi.getProjects();
+  return projects.forEach((project) => {
+    config.newSelectSingle().setId("projectId").setName("Project").setHelpText("Select the project to use.").addOption(
+      config.newOptionBuilder().setValue(project.id).setLabel(project.name)
+    );
+  }), config.build();
+}
+require(getAuthType());
+require(resetAuth());
+require(isAuthValid());
+require(getConfig());

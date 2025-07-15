@@ -1,4 +1,11 @@
+// Productive API
+// https://productive.io/docs/api/v2/projects
+// https://productive.io/docs/api/v2/time_entries
 class ProductiveApi {
+    /**
+     * @constructor
+     * @param {string} apiKey 
+     */
     constructor(apiKey) {
         if (!apiKey) {
             throw new Error('API key is required');
@@ -7,6 +14,10 @@ class ProductiveApi {
         this.apiKey = apiKey;
     }
 
+    /**
+     * Validate the API key
+     * @returns {boolean}
+     */
     validateKey() {
         if (this.apiKey.length !== 36) {
             throw new Error('API key is invalid');
@@ -15,6 +26,11 @@ class ProductiveApi {
         return true;
     }
 
+    /**
+     * Get all projects
+     * @param {string} organisationId 
+     * @returns {Array}
+     */
     getProjects(organisationId) {
         try {
             let projects = [];
@@ -62,6 +78,14 @@ class ProductiveApi {
         }
     }
 
+    /**
+     * 
+     * @param {number} organisationId 
+     * @param {number} projectId 
+     * @param {string} startDate 
+     * @param {string} endDate 
+     * @returns {Array}
+     */
     getTimeEntries(organisationId, projectId, startDate, endDate) {
         try {
             let timeEntries = [];
@@ -117,6 +141,12 @@ class ProductiveApi {
         }
     }
 
+    /**
+     * Get the name of a project
+     * @param {number} organisationId 
+     * @param {number} projectId 
+     * @returns {string}
+     */
     getProjectName(organisationId, projectId) {
         try {
             let nextUrl = 'https://api.productive.io/api/v2/projects';

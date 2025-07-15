@@ -6,12 +6,12 @@
   "runtimeVersion": "V8",
   "dataStudio": {
     "name": "Time Tracking",
-    "logoUrl": "https://raw.githubusercontent.com/npm/logos/master/npm%20square/n-64.png",
+    "logoUrl": "https://raw.githubusercontent.com/creode/time-tracking-connector/refs/heads/main/assets/creode-logo.jpeg",
     "company": "Creode",
     "companyUrl": "https://creode.co.uk",
     "addonUrl": "https://github.com/creode/time-tracking-connector",
     "supportUrl": "https://github.com/creode/time-tracking-connector/issues",
-    "description": "Get time tracking data from Productive.",
+    "description": "Get time tracking data from Various Data Sources.",
     "sources": ["Productive"],
     "templates": {
       "default": "1twu0sHjqR5dELAPyGJcw4GS3-D0_NTrQ"

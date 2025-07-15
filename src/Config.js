@@ -1,3 +1,12 @@
+// Config.js
+// https://developers.google.com/looker-studio/connector/build#define_configuration_via_getconfig
+var cc = DataStudioApp.createCommunityConnector();
+
+/**
+ * Get the config
+ * @param {object} request 
+ * @returns {object}
+ */
 function getConfig(request) {
     var config = cc.getConfig();
     
@@ -17,14 +26,15 @@ function getConfig(request) {
         // Set organisation id.
         config.newTextInput()
             .setId('organisationId')
-            .setName('Organisation')
-            .setHelpText('Enter the organisation id.');
+            .setName('Productive Organisation ID')
+            .setHelpText('Enter the organisation ID found in the same section as the API key.');
     }
 
     if (!isFirstRequest) {
         var projectSelect = config.newSelectSingle()
             .setId("projectId")
-            .setName("Projects");
+            .setName("Productive Project")
+            .setHelpText('Select the project you want to get data from.');
 
         var organisationId = configParams.organisationId;
 

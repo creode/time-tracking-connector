@@ -1,3 +1,11 @@
+// Data.js
+// https://developers.google.com/looker-studio/connector/build#fetch_and_return_data_with_getdata
+
+/**
+ * Get the data
+ * @param {object} request 
+ * @returns {object}
+ */
 function getData(request) {
     try {
         var configParams = request.configParams;

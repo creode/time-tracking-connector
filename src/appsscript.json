@@ -14,7 +14,7 @@
     "description": "Get time tracking data from Various Data Sources.",
     "sources": ["Productive"],
     "templates": {
-      "default": "1twu0sHjqR5dELAPyGJcw4GS3-D0_NTrQ"
+      "default": "0c902ecc-696e-4046-bed2-6d260d3cfd15"
     }
   },
   "oauthScopes": [

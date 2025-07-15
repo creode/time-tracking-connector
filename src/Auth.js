@@ -1,5 +1,11 @@
+// Auth.js
+// https://developers.google.com/looker-studio/connector/build#define_authentication_type_in_getauthtype
 var cc = DataStudioApp.createCommunityConnector();
 
+/**
+ * Get the auth type
+ * @returns {object}
+ */
 function getAuthType() {
     return cc.newAuthTypeResponse()
       .setAuthType(cc.AuthType.KEY)
@@ -7,11 +13,18 @@ function getAuthType() {
       .build();
 }
 
+/**
+ * Reset the auth
+ */
 function resetAuth() {
     var userProperties = PropertiesService.getUserProperties();
     userProperties.deleteProperty('dscc.key');
 }
 
+/**
+ * Check if the auth is valid
+ * @returns {boolean}
+ */
 function isAuthValid() {
     var userProperties = PropertiesService.getUserProperties();
     var key = userProperties.getProperty('dscc.key');

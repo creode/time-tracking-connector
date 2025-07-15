@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "watch": "clasp push --watch",
+    "push": "clasp push",
+    "deploy": "clasp deploy"
   },
   "devDependencies": {
     "@google/clasp": "^2.3.0"

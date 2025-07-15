@@ -1,3 +1,11 @@
+// Schema.js
+// https://developers.google.com/looker-studio/connector/build#define_the_fields_with_getschema
+var cc = DataStudioApp.createCommunityConnector();
+
+/**
+ * Get the fields
+ * @returns {object}
+ */
 function getFields() {
     var fields = cc.getFields();
     var types = cc.FieldType;

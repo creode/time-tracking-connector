@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "watch": "clasp push --watch",
-    "push": "clasp push",
-    "deploy": "clasp deploy"
+    "watch": "cd src && clasp push --watch",
+    "push": "cd src && clasp push",
+    "deploy": "cd src && clasp deploy"
   },
   "devDependencies": {
     "@google/clasp": "^2.3.0"

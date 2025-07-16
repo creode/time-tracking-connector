@@ -75,21 +75,6 @@ function getData(request: GoogleAppsScript.Data_Studio.Request<any>): GoogleApps
                         case 'serviceId':
                             row.push(timeEntry.serviceId || '');
                             break;
-                        case 'serviceName':
-                            row.push(timeEntry.serviceName || '');
-                            break;
-                        case 'serviceWorkedTime':
-                            row.push(parseFloat(timeEntry.serviceWorkedTime) || 0);
-                            break;
-                        case 'serviceBudgetedTime':
-                            row.push(parseFloat(timeEntry.serviceBudgetedTime) || 0);
-                            break;
-                        case 'serviceBillableTime':
-                            row.push(parseFloat(timeEntry.serviceBillableTime) || 0);
-                            break;  
-                        case 'serviceEstimatedTime':
-                            row.push(parseFloat(timeEntry.serviceEstimatedTime) || 0);
-                            break;
                         default:
                             row.push(null);
                     }

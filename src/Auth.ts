@@ -27,7 +27,7 @@ function resetAuth() {
  */
 function isAuthValid() {
     var userProperties = PropertiesService.getUserProperties();
-    var key = userProperties.getProperty('dscc.key');
+    var key: string | null = userProperties.getProperty('dscc.key');
 
     // Validate the key against the api.
     var productiveApi = new ProductiveApi(key);

@@ -8,7 +8,7 @@ class ProductiveApi {
      * @constructor
      * @param {string} apiKey 
      */
-    constructor(apiKey: string) {
+    constructor(apiKey: string | null) {
         if (!apiKey) {
             throw new Error('API key is required');
         }
@@ -130,11 +130,6 @@ class ProductiveApi {
                                 billableTime: timeEntry.attributes.billable_time,
                                 description: timeEntry.attributes.description,
                                 serviceId: service.id,
-                                serviceName: service.name,
-                                serviceEstimated: service.estimatedTime,
-                                serviceBillableTime: service.billableTime,
-                                serviceBudgetedTime: service.budgetedTime,
-                                serviceWorkedTime: service.workedTime
                             }
                         }
                     );

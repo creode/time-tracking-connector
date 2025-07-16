@@ -5,13 +5,13 @@
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
   "dataStudio": {
-    "name": "Time Tracking",
+    "name": "Time Logs Connector",
     "logoUrl": "https://raw.githubusercontent.com/creode/time-tracking-connector/refs/heads/main/assets/creode-logo.jpeg",
     "company": "Creode",
     "companyUrl": "https://creode.co.uk",
     "addonUrl": "https://github.com/creode/time-tracking-connector",
     "supportUrl": "https://github.com/creode/time-tracking-connector/issues",
-    "description": "Get time tracking data from Various Data Sources.",
+    "description": "Get time logs data from Productive.",
     "sources": ["Productive"],
     "templates": {
       "default": "0c902ecc-696e-4046-bed2-6d260d3cfd15"

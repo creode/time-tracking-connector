@@ -4,7 +4,7 @@ var cc = DataStudioApp.createCommunityConnector();
 
 /**
  * Get the fields
- * @returns {object}
+ * @returns {GoogleAppsScript.Data_Studio.Fields}
  */
 function getFields() {
     var fields = cc.getFields();
@@ -80,6 +80,6 @@ function getFields() {
     return fields;
 }
 
-function getSchema(request) {
-    return {schema: getFields().build()};
+function getSchema(request: GoogleAppsScript.Data_Studio.Request<any>): GoogleAppsScript.Data_Studio.GetSchemaResponse {
+    return cc.newGetSchemaResponse().setFields(getFields()).build();
 }

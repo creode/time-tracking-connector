@@ -6,7 +6,7 @@ var cc = DataStudioApp.createCommunityConnector();
  * Get the auth type
  * @returns {object}
  */
-function getAuthType() {
+function getAuthType(): GoogleAppsScript.Data_Studio.GetAuthTypeResponse {
     return cc.newAuthTypeResponse()
       .setAuthType(cc.AuthType.KEY)
       .setHelpUrl('https://help.productive.io/en/articles/5440689-api-access-with-personal-access-tokens')

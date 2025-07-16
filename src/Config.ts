@@ -4,10 +4,10 @@ var cc = DataStudioApp.createCommunityConnector();
 
 /**
  * Get the config
- * @param {object} request 
- * @returns {object}
+ * @param {GoogleAppsScript.Data_Studio.Request<any>} request 
+ * @returns {GoogleAppsScript.Data_Studio.Config}
  */
-function getConfig(request) {
+function getConfig(request: GoogleAppsScript.Data_Studio.Request<any>): GoogleAppsScript.Data_Studio.Config {
     var config = cc.getConfig();
     
     // Get the API key from user properties
@@ -40,7 +40,7 @@ function getConfig(request) {
 
         var productiveApi = new ProductiveApi(apiKey);
         var projects = productiveApi.getProjects(organisationId);
-        projects.forEach(function(project) {
+        projects.forEach(function(project: any) {
             projectSelect.addOption(config.newOptionBuilder().setLabel(project.name).setValue(project.id));
         });
     }

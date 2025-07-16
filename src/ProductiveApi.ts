@@ -8,7 +8,7 @@ class ProductiveApi {
      * @constructor
      * @param {string} apiKey 
      */
-    constructor(apiKey) {
+    constructor(apiKey: string) {
         if (!apiKey) {
             throw new Error('API key is required');
         }
@@ -20,7 +20,7 @@ class ProductiveApi {
      * Validate the API key
      * @returns {boolean}
      */
-    validateKey() {
+    validateKey(): boolean {
         if (this.apiKey.length !== 36) {
             throw new Error('API key is invalid');
         }
@@ -33,7 +33,7 @@ class ProductiveApi {
      * @param {string} organisationId 
      * @returns {Array}
      */
-    getProjects(organisationId) {
+    getProjects(organisationId: string): any[] {
         try {
             let projects = [];
             let nextUrl = 'https://api.productive.io/api/v2/projects';
@@ -88,7 +88,7 @@ class ProductiveApi {
      * @param {string} endDate 
      * @returns {Array}
      */
-    getTimeEntries(organisationId, projectId, startDate, endDate) {
+    getTimeEntries(organisationId: string, projectId: string, startDate: string, endDate: string): any[] {
         try {
             let timeEntries = [];
             let nextUrl = `https://api.productive.io/api/v2/time_entries?include=service&filter[$op]=and&filter[0][project_id]=${projectId}&filter[1][date][gt_eq]=${startDate}&filter[2][date][lt_eq]=${endDate}`;
@@ -161,7 +161,7 @@ class ProductiveApi {
      * @param {number} projectId 
      * @returns {string}
      */
-    getProjectName(organisationId, projectId) {
+    getProjectName(organisationId: string, projectId: string): string {
         try {
             let nextUrl = 'https://api.productive.io/api/v2/projects';
 
@@ -212,7 +212,7 @@ class ProductiveApi {
      * @param {number} serviceId 
      * @returns {string}
      */
-    getServiceById(organisationId, serviceId) {
+    getServiceById(organisationId: string, serviceId: string): any {
         let nextUrl = `https://api.productive.io/api/v2/services/${serviceId}`;
 
         var response = UrlFetchApp.fetch(nextUrl, {

@@ -3,10 +3,10 @@
 
 /**
  * Get the data
- * @param {object} request 
- * @returns {object}
+ * @param {GoogleAppsScript.Data_Studio.Request<any>} request 
+ * @returns {GoogleAppsScript.Data_Studio.GetDataResponse}
  */
-function getData(request) {
+function getData(request: GoogleAppsScript.Data_Studio.Request<any>): GoogleAppsScript.Data_Studio.GetDataResponse {
     try {
         var configParams = request.configParams;
 
@@ -44,9 +44,11 @@ function getData(request) {
             })
         );
 
+        let dataResponse = cc.newGetDataResponse();
+
         // Format the data according to the requested fields
-        var formattedData = timeEntries.map(function(timeEntry) {
-            var row = [];
+        timeEntries.map(function(timeEntry: any) {
+            var row: any[] = [];
             
             // Map each requested field to its value
             request.fields.forEach(function(field) {
@@ -89,23 +91,20 @@ function getData(request) {
                             row.push(parseFloat(timeEntry.serviceEstimatedTime) || 0);
                             break;
                         default:
-                            row.push('');
+                            row.push(null);
                     }
                 } catch (fieldError) {
                     console.error('Error processing field ' + field.name + ': ' + fieldError.message);
                     row.push('');
                 }
             });
-            
-            return {'values': row};
+
+            dataResponse.addRow(row);
         });
 
-        let returnedData = {
-            schema: requestedFields.build(),
-            rows: formattedData
-        };
+        dataResponse.setFields(requestedFields);
 
-        return returnedData;
+        return dataResponse.build();
     } catch (error) {
         console.error('Error in getData: ' + error.message);
         throw new Error('Data retrieval failed: ' + error.message);

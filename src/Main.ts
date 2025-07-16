@@ -7,7 +7,7 @@ var cc = DataStudioApp.createCommunityConnector();
  * Check if the user is an admin
  * @returns {boolean}
  */
-function isAdminUser() {
+function isAdminUser(): boolean {
     // TODO: Remove when deploying for real.
     return true;
 }

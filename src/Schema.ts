@@ -43,6 +43,40 @@ function getFields() {
         .setType(types.NUMBER)
         .setAggregation(aggregations.SUM);
 
+    fields.newDimension()
+        .setId('serviceId')
+        .setName('Service ID')
+        .setType(types.TEXT);
+
+    fields.newDimension()
+        .setId('serviceName')
+        .setName('Service')
+        .setType(types.TEXT);
+
+    fields.newMetric()
+        .setId('serviceWorkedTime')
+        .setName('Service Worked Time')
+        .setType(types.NUMBER)
+        .setAggregation(aggregations.SUM);
+
+    fields.newMetric()
+        .setId('serviceBudgetedTime')
+        .setName('Service Budgeted Time')
+        .setType(types.NUMBER)
+        .setAggregation(aggregations.SUM);
+
+    fields.newMetric()
+        .setId('serviceBillableTime')
+        .setName('Service Billable Time')
+        .setType(types.NUMBER)
+        .setAggregation(aggregations.SUM);
+
+    fields.newMetric()
+        .setId('serviceEstimatedTime')
+        .setName('Service Estimated Time')
+        .setType(types.NUMBER)
+        .setAggregation(aggregations.SUM);
+
     return fields;
 }
 

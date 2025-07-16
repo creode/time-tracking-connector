@@ -2,6 +2,8 @@
 // https://productive.io/docs/api/v2/projects
 // https://productive.io/docs/api/v2/time_entries
 class ProductiveApi {
+    private apiKey: string;
+
     /**
      * @constructor
      * @param {string} apiKey 
@@ -89,7 +91,7 @@ class ProductiveApi {
     getTimeEntries(organisationId, projectId, startDate, endDate) {
         try {
             let timeEntries = [];
-            let nextUrl = `https://api.productive.io/api/v2/time_entries?filter[$op]=and&filter[0][project_id]=${projectId}&filter[1][date][gt_eq]=${startDate}&filter[2][date][lt_eq]=${endDate}`;
+            let nextUrl = `https://api.productive.io/api/v2/time_entries?include=service&filter[$op]=and&filter[0][project_id]=${projectId}&filter[1][date][gt_eq]=${startDate}&filter[2][date][lt_eq]=${endDate}`;
 
             // Get project name for the given projectId
             let projectName = this.getProjectName(organisationId, projectId);
@@ -115,15 +117,27 @@ class ProductiveApi {
                         throw new Error('Invalid API response format: missing or invalid data array');
                     }
 
-                    let currentTimeEntries = responseData.data.map((timeEntry) => ({
-                        id: timeEntry.id,
-                        projectId: projectId,
-                        projectName: projectName,
-                        date: timeEntry.attributes.date,
-                        time: timeEntry.attributes.time,
-                        billableTime: timeEntry.attributes.billable_time,
-                        description: timeEntry.attributes.description
-                    }));
+                    let currentTimeEntries = responseData.data.map(
+                        (timeEntry) => {
+                            let service = this.getServiceById(organisationId, timeEntry.relationships.service.data.id);
+                        
+                            return {
+                                id: timeEntry.id,
+                                projectId: projectId,
+                                projectName: projectName,
+                                date: timeEntry.attributes.date,
+                                time: timeEntry.attributes.time,
+                                billableTime: timeEntry.attributes.billable_time,
+                                description: timeEntry.attributes.description,
+                                serviceId: service.id,
+                                serviceName: service.name,
+                                serviceEstimated: service.estimatedTime,
+                                serviceBillableTime: service.billableTime,
+                                serviceBudgetedTime: service.budgetedTime,
+                                serviceWorkedTime: service.workedTime
+                            }
+                        }
+                    );
 
                     timeEntries = timeEntries.concat(currentTimeEntries);
 
@@ -190,5 +204,43 @@ class ProductiveApi {
             console.error('Error in getProjectName: ' + error.message);
             return 'Unknown Project';
         }
+    }
+
+    /**
+     * Get the name of a service
+     * @param {number} organisationId 
+     * @param {number} serviceId 
+     * @returns {string}
+     */
+    getServiceById(organisationId, serviceId) {
+        let nextUrl = `https://api.productive.io/api/v2/services/${serviceId}`;
+
+        var response = UrlFetchApp.fetch(nextUrl, {
+            headers: {
+                'X-Auth-Token': `${this.apiKey}`,
+                'X-Organization-Id': `${organisationId}`,
+                'Content-Type': 'application/vnd.api+json; ext=bulk'
+            },
+            muteHttpExceptions: true
+        });
+
+        if (response.getResponseCode() !== 200) {
+            throw new Error('API request failed with status: ' + response.getResponseCode() + ' - ' + response.getContentText());
+        }
+
+        let responseData = JSON.parse(response.getContentText());
+
+        if (!responseData.data) {
+            throw new Error('Invalid API response format: missing or invalid data array');
+        }
+
+        return {
+            id: responseData.data.id,
+            name: responseData.data.attributes.name,
+            estimatedTime: responseData.data.attributes.estimated_time,
+            billableTime: responseData.data.attributes.billable_time,
+            budgetedTime: responseData.data.attributes.budgeted_time,
+            workedTime: responseData.data.attributes.worked_time
+        };
     }
 }

@@ -1,4 +1,5 @@
 {
+  "name": "productive-connector",
   "scripts": {
     "build": "rm -rf build && tsc && webpack",
     "push": "npm run build && clasp push -f",

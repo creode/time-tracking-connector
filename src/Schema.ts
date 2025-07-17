@@ -43,7 +43,7 @@ function getFields() {
         .setType(types.NUMBER)
         .setAggregation(aggregations.SUM);
 
-    fields.newDimension()
+    fields.newMetric()
         .setId('serviceId')
         .setName('Service ID')
         .setType(types.TEXT);

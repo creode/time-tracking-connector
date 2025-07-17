@@ -21,8 +21,8 @@ class ProductiveApi {
      * @returns {boolean}
      */
     validateKey(): boolean {
-        if (this.apiKey.length !== 36) {
-            throw new Error('API key is invalid');
+        if (!this.apiKey || this.apiKey.length !== 36) {
+            return false;
         }
 
         return true;

@@ -20,7 +20,7 @@ function getConfig(request: GoogleAppsScript.Data_Studio.Request<any>): GoogleAp
         throw new Error('API key not found. Please authenticate first.');
     }
 
-    if (isFirstRequest) {
+    if (isFirstRequest || !configParams.organisationId) {
         config.setIsSteppedConfig(true);
 
         // Set organisation id.
@@ -30,11 +30,12 @@ function getConfig(request: GoogleAppsScript.Data_Studio.Request<any>): GoogleAp
             .setHelpText('Enter the organisation ID found in the same section as the API key.');
     }
 
-    if (!isFirstRequest) {
+    if (!isFirstRequest && configParams.organisationId) {
         var projectSelect = config.newSelectSingle()
             .setId("projectId")
             .setName("Productive Project")
-            .setHelpText('Select the project you want to get data from.');
+            .setHelpText('Select the project you want to get data from.')
+            .setAllowOverride(true);
 
         var organisationId = configParams.organisationId;
 
